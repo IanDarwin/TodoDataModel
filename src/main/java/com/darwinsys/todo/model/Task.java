@@ -28,10 +28,10 @@ public class Task implements Serializable {
 	Character priority; // 'A'..'Z': how important?
 	String name;	// what to do
 	Date creationDate; // when you decided you had to do it
-	String project;		// what this task is part of
-	String context;	// where to do it
+	Project project;		// what this task is part of
+	Context context;	// where to do it
 	Date dueDate;	// when to do it by
-	boolean complete = false;
+	Status status;
 	Date completedDate; // when you actually did it
 	long modified = System.currentTimeMillis();	// tstamp (UTC!) when last modified.
 	
@@ -47,31 +47,6 @@ public class Task implements Serializable {
 	
 	public Task(String name, String project, String context) {
 		this(0, null, name, today, project, context, false, null, null);
-	}
-
-	/**
-	 * Construct a Task with all values
-	 * @param id
-	 * @param name
-	 * @param creationDate
-	 * @param project
-	 * @param context
-	 * @param complete
-	 * @param completedDate
-	 * @param dueDate
-	 */
-	public Task(long id, Character priority, String name, Date creationDate, String project,
-			String context, boolean complete, Date completedDate, Date dueDate) {
-		super();
-		this.id = id;
-		this.priority = priority;
-		this.name = name;
-		this.creationDate = creationDate;
-		this.project = project;
-		this.context = context;
-		this.complete = complete;
-		this.completedDate = completedDate;
-		this.dueDate = dueDate;
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -142,19 +117,20 @@ public class Task implements Serializable {
 		this.dueDate = dueDate;
 	}
 	
-	public boolean isComplete() {
-		return complete;
+	public Status getStatus() {
+		return status;
 	}
 
 	/**
 	 * set completion to true or false, and side-effect set completion date
 	 * to today or to null, but if setting to true and client already set
 	 * completion data, leave well enough alone.
+	 * XXX This may not play well with JPA
 	 * @param complete
 	 */
-	public void setComplete(boolean complete) {
-		this.complete = complete;
-		if (complete) {
+	public void setStatus(Status status) {
+		this.status = status;
+		if (status == Status.COMPLETE) {
 			if (getCompletedDate() == null) {
 				completedDate = new Date();
 			}
