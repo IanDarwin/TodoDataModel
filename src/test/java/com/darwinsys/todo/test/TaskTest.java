@@ -6,15 +6,17 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
+import com.darwinsys.todo.model.Context;
 import com.darwinsys.todo.model.Date;
+import com.darwinsys.todo.model.Project;
 import com.darwinsys.todo.model.Task;
 
 public class TaskTest {
 	
 	private static final String GET_THE_LEAD_OUT = "Get the lead out";
 	private static final char SPACE = ' ';
-	private static final String PROJECT = "Plumbing";
-	private static final String CONTEXT = "Home";
+	private static final Project PROJECT = new Project("Plumbing");
+	private static final Context CONTEXT = new Context("Home");
 	Task t = new Task();
 	String today = new Date().toString();
 	
@@ -25,15 +27,15 @@ public class TaskTest {
 	
 	@Test
 	public void testSetCompletedSetsCompletionDate() {
-		t.setComplete(true);
+		t.complete();
 		assertNotNull("completion goo", t.getCompletedDate());
 	}
 	
 	@Test
 	public void testSetNotCompletedSetsCompletionDateNull() {
-		t.setComplete(true);
+		t.complete();
 		assertNotNull("completion true", t.getCompletedDate());
-		t.setComplete(false);
+		t.active();
 		assertNull("completion false", t.getCompletedDate());
 	}
 
@@ -55,7 +57,7 @@ public class TaskTest {
 	@Test
 	public void testCompleteToString() {
 		t.setName(GET_THE_LEAD_OUT);
-		t.setComplete(true);
+		t.complete();
 		assertEquals("toString", "x" + SPACE + today + SPACE + today + ' ' + GET_THE_LEAD_OUT, t.toString());
 	}
 }

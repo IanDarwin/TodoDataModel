@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Import {
 	
-	public static Pattern re = Pattern.compile(
+	public static final Pattern REGEX = Pattern.compile(
 			"(x)?( \\d{4}\\-\\d{2}\\-\\d{2})?" + // Completion flag, completion date+
 			" ?" +
 			"(\\([A-Z]\\))?\\s*(\\d{4}-\\d{2}-\\d{2}\\s+)?" +		// PRIORITY, CreationDate
@@ -29,17 +29,16 @@ public class Import {
 	}
 	
 	public static Task importTask(String str) {
-		Matcher m = re.matcher(str);
+		Matcher m = REGEX.matcher(str);
 		Task t = new Task();
 		if (m.matches()) {
-			//for (int i = 0; i < m.groupCount(); i++) {
-			//	System.out.println(i + " " + m.group(i));
-			//}
-			if (m.group(GROUP_COMPLETED) != null) {
-				t.setComplete(true);
+
+			String completed = m.group(GROUP_COMPLETED);
+			if (completed != null && completed.startsWith("x")) {
+				t.complete();
 			}
 			String prio = m.group(GROUP_PRIO);
-			if (prio != null) {
+			if (prio != null && prio.startsWith("(")) {
 				t.setPriority(prio.charAt(1));
 			}
 			t.setName(m.group(GROUP_REST));

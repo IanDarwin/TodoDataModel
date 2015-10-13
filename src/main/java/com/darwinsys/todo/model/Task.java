@@ -46,7 +46,9 @@ public class Task implements Serializable {
 	}
 	
 	public Task(String name, String project, String context) {
-		this(0, null, name, today, project, context, false, null, null);
+		this.name = name;
+		this.project = new Project(project);
+		this.context = new Context(context);
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -90,17 +92,17 @@ public class Task implements Serializable {
 		this.creationDate = creationDate;
 	}
 	
-	public String getProject() {
+	public Project getProject() {
 		return project;
 	}
-	public void setProject(String project) {
+	public void setProject(Project project) {
 		this.project = project;
 	}
 	
-	public String getContext() {
+	public Context getContext() {
 		return context;
 	}
-	public void setContext(String context) {
+	public void setContext(Context context) {
 		this.context = context;
 	}
 	
@@ -150,8 +152,18 @@ public class Task implements Serializable {
 	}
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
-		complete = completedDate != null;
 	}
+
+	public void active() {
+		this.completedDate = null;
+		status = Status.ACTIVE;
+	}
+	
+	public void complete() {
+		this.completedDate = new Date();
+		status = Status.COMPLETE;
+	}
+	
 	
 	/** ToString converts to String but in todo.txt format! 
 	 * A fully-fleshed-out example from todotxt.com:
@@ -160,7 +172,7 @@ public class Task implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		if (isComplete()) {
+		if (status == Status.COMPLETE) {
 			sb.append('x').append(SPACE).append(getCompletedDate()).append(SPACE);
 		}
 		sb.append(getCreationDate());
@@ -179,7 +191,6 @@ public class Task implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (complete ? 1231 : 1237);
 		result = prime * result
 				+ ((completedDate == null) ? 0 : completedDate.hashCode());
 		result = prime * result + ((context == null) ? 0 : context.hashCode());
@@ -187,8 +198,12 @@ public class Task implements Serializable {
 				+ ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (modified ^ (modified >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((priority == null) ? 0 : priority.hashCode());
 		result = prime * result + ((project == null) ? 0 : project.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
@@ -201,8 +216,6 @@ public class Task implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Task other = (Task) obj;
-		if (complete != other.complete)
-			return false;
 		if (completedDate == null) {
 			if (other.completedDate != null)
 				return false;
@@ -225,15 +238,24 @@ public class Task implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
+		if (modified != other.modified)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (priority == null) {
+			if (other.priority != null)
+				return false;
+		} else if (!priority.equals(other.priority))
+			return false;
 		if (project == null) {
 			if (other.project != null)
 				return false;
 		} else if (!project.equals(other.project))
+			return false;
+		if (status != other.status)
 			return false;
 		return true;
 	}
