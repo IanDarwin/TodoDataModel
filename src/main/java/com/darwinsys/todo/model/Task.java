@@ -10,9 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-/** One ToDo item or "task".
- * See http://todotxt.com/ and https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format.
+/**
+ * One ToDo item or "task".
+ * See http://todotxt.com/ and 
+ * https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format.
  * @author Ian Darwin
  */
 @Entity
@@ -21,13 +24,12 @@ public class Task implements Serializable {
 	private static final long serialVersionUID = 4917727200248757334L;
 	
 	private static final char SPACE = ' ';
-	private static final Date today = new Date();
 
 	private static final char PROJECT = '+', CONTEXT = '@';
 	long id;
 	Character priority; // 'A'..'Z': how important?
 	String name;	// what to do
-	Date creationDate; // when you decided you had to do it
+	Date creationDate = new Date(); // when you decided you had to do it
 	Project project;		// what this task is part of
 	Context context;	// where to do it
 	Date dueDate;	// when to do it by
@@ -92,6 +94,7 @@ public class Task implements Serializable {
 		this.creationDate = creationDate;
 	}
 	
+	@ManyToOne
 	public Project getProject() {
 		return project;
 	}
@@ -99,6 +102,7 @@ public class Task implements Serializable {
 		this.project = project;
 	}
 	
+	@ManyToOne
 	public Context getContext() {
 		return context;
 	}
@@ -237,8 +241,6 @@ public class Task implements Serializable {
 		} else if (!dueDate.equals(other.dueDate))
 			return false;
 		if (id != other.id)
-			return false;
-		if (modified != other.modified)
 			return false;
 		if (name == null) {
 			if (other.name != null)

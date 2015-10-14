@@ -35,6 +35,7 @@ public class ImportTest {
                             {new Task("Call Mom @Home"),  "Call Mom @Home"},
                             //{new Task("Call Mom", null, "Home"),  "Call Mom @Home"},
             };
+            ((Task)data[0][0]).setPriority('A');
             return Arrays.asList(data);                                     
     }
     
