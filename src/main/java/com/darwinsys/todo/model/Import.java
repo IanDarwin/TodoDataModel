@@ -39,7 +39,19 @@ public class Import {
 			}
 			String prio = m.group(GROUP_PRIO);
 			if (prio != null && prio.startsWith("(")) {
-				t.setPriority(prio.charAt(1));
+				String prioString = prio.substring(1);
+				prioString = prioString.substring(0, prioString.length() - 1);
+				if (prioString.length() == 1) {
+					switch(prioString.charAt(0)) {
+						case 'a': case 'A':
+							t.setPriority(Priority.Top);
+							break;
+						default:
+							throw new IllegalStateException("not coded yet");
+					}
+				} else {
+					t.setPriority(Priority.valueOf(prioString));
+				}
 			}
 			t.setName(m.group(GROUP_REST));
 			return t;

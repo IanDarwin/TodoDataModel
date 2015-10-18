@@ -6,6 +6,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.Enumerated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,14 +28,14 @@ public class Task implements Serializable {
 
 	private static final char PROJECT = '+', CONTEXT = '@';
 	long id;
-	Character priority; // 'A'..'Z': how important?
+	Priority priority; // Enum; how important?
 	String name;	// what to do
 	Date creationDate = new Date(); // when you decided you had to do it
-	Project project;		// what this task is part of
+	Project project;	// what this task is part of
 	Context context;	// where to do it
-	Date dueDate;	// when to do it by
+	Date dueDate;		// when to do it by
 	Status status;
-	Date completedDate; // when you actually did it
+	Date completedDate = null; // when you actually did it
 	long modified = System.currentTimeMillis();	// tstamp (UTC!) when last modified.
 	
 	public Task() {
@@ -61,17 +62,15 @@ public class Task implements Serializable {
 		this.id = id;
 	}
 	
-	public Character getPriority() {
+	@Enumerated(/*String*/)
+	public Priority getPriority() {
 		return priority;
 	}
-	public void setPriority(Character priority) {
+	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
-	public void setPriority(char priority) {
-		if (priority < 'A' || priority > 'Z') {
-			throw new IllegalArgumentException("Invalid priority " + priority);
-		}
-		setPriority(Character.valueOf(priority));
+	public void setPriority(String priority) {
+		setPriority(Priority.valueOf(priority));
 	}
 
 	public String getName() {

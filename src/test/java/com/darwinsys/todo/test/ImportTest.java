@@ -12,6 +12,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.darwinsys.todo.model.Import;
+import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Task;
 
 @RunWith(Parameterized.class)
@@ -21,21 +22,15 @@ public class ImportTest {
 		{new Task("Call Mom 1"), "(A) Call Mom 1"},
 		{new Task("Call Mom 2"), "Call Mom 2"},
 		{new Task("Call Mom 3", null, "Home"),  "Call Mom 3 @Home"},
+		//{new Task("Call Mom", null, "Home"),  "Call Mom @Home"},
 	};
 	static {
-		((Task) data[0][0]).setPriority('A');
+		((Task) data[0][0]).setPriority(Priority.Top);
 	}
 	
 	/** This method provides data to the constructor for use in tests */
     @Parameters
     public static List<Object[]> data() {           
-            final Object[][] data = new Object[][]  {
-                            {new Task("Call Mom"),  "(A) Call Mom"},
-                            {new Task("Call Mom"), "Call Mom"},
-                            {new Task("Call Mom @Home"),  "Call Mom @Home"},
-                            //{new Task("Call Mom", null, "Home"),  "Call Mom @Home"},
-            };
-            ((Task)data[0][0]).setPriority('A');
             return Arrays.asList(data);                                     
     }
     

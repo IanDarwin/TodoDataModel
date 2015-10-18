@@ -18,7 +18,7 @@ public class ExportTest {
 	@Before
 	public void init() {
 		t.setName(TASK_NAME);
-		t.setPriority('B');
+		t.setPriority(Priority.High);
 		t.setCreationDate(new Date(2013,10,06));
 	}
 
