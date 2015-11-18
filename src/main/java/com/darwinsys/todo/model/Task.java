@@ -7,11 +7,13 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * One ToDo item or "task".
@@ -20,6 +22,7 @@ import javax.persistence.ManyToOne;
  * @author Ian Darwin
  */
 @Entity
+@Table(name="todo")
 public class Task implements Serializable {
 	
 	private static final long serialVersionUID = 4917727200248757334L;
@@ -62,7 +65,7 @@ public class Task implements Serializable {
 		this.id = id;
 	}
 	
-	@Enumerated(/*String*/)
+	@Enumerated(EnumType.ORDINAL)
 	public Priority getPriority() {
 		return priority;
 	}

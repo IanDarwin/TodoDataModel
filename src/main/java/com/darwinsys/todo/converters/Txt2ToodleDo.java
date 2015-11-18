@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.darwinsys.todo.model.ExportToodleDo;
 import com.darwinsys.todo.model.Import;
 import com.darwinsys.todo.model.Task;
 
@@ -14,7 +13,7 @@ public class Txt2ToodleDo {
 
 	public static void main(String[] args) throws Exception {
 		List<Task> tasks = Import.importTasks(fileToList("/home/ian/TODO.txt"));
-		final List<String> exportedTasks = new ExportToodleDo().export(tasks);
+		final List<String> exportedTasks = new ExportText().export(tasks);
 		for (String s : exportedTasks) {
 			System.out.println(s);
 		}

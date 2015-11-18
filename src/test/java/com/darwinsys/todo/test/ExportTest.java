@@ -6,13 +6,14 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.darwinsys.todo.converters.ExportText;
 import com.darwinsys.todo.model.*;
 
 public class ExportTest {
 
 	private final static String TASK_NAME = "Get laundry done";
 
-	Export exporter = new ExportToodleDo();
+	Export exporter = new ExportText();
 	Task t = new Task();
 
 	@Before
@@ -27,6 +28,6 @@ public class ExportTest {
 		String expect = 
 		"\"Get laundry done\",,,,,\"2013-10-06\",,,,,\"2\",,,,";
 		String actual = exporter.export(t);
-		assertEquals("export ToodleDo", expect, actual);
+		assertEquals("export text", expect, actual);
 	}
 }
