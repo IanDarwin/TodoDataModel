@@ -9,6 +9,7 @@ import javax.persistence.Embeddable;
 /*
  * Simple Date for Tasks: only has Year, Month, and Day.
  * Month is number the human way, starting at one.
+ * This should be destroyed and get replaced with java.time.LocalDate.
  */
 public class Date implements Serializable {
 
@@ -20,8 +21,6 @@ public class Date implements Serializable {
 	public Date() {
 		this(new java.util.Date());
 	}
-	
-
 	
 	/** Construct a Date for the given y-m-d */
 	public Date(int year, int month, int day) {
@@ -43,8 +42,11 @@ public class Date implements Serializable {
 	}
 	
 	private void populate(String dateString) {
-		if (dateString == null) {
-			throw new NullPointerException("dateString may not be null");
+		if (dateString == null || dateString.length() == 0) {
+			year = 2012;
+			month = 12;
+			day = 12;
+			return;
 		}
 		Scanner scan = new Scanner(dateString.replace('-', ' '));
 		try {
@@ -52,6 +54,8 @@ public class Date implements Serializable {
 			month = scan.nextInt();
 			day = scan.nextInt();
 		} catch (InputMismatchException e) {
+			throw new IllegalArgumentException("Not YYYY-MM-DD: " + dateString);
+		} catch (java.util.NoSuchElementException e) {
 			throw new IllegalArgumentException("Not YYYY-MM-DD: " + dateString);
 		} finally {
 			scan.close();
