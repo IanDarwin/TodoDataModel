@@ -10,7 +10,6 @@ import javax.persistence.Embeddable;
  * Simple Date for Tasks: only has Year, Month, and Day.
  * Month is number the human way, starting at one.
  */
-@Embeddable
 public class Date implements Serializable {
 
 	private static final long serialVersionUID = -5944728253397921658L;

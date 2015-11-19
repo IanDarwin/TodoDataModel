@@ -6,7 +6,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.Embedded;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
 import javax.persistence.Entity;
@@ -16,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.darwinsys.todo.database.DateConverter;
 import com.darwinsys.todo.database.PriorityConverter;
 
 /**
@@ -87,12 +87,7 @@ public class Task implements Serializable {
 		this.name = name;
 	}
 	
-	@Embedded
-	@AttributeOverrides({
-	    @AttributeOverride(name="year",column=@Column(name="createdYear")),
-	    @AttributeOverride(name="month",column=@Column(name="createdMonth")),
-	    @AttributeOverride(name="day",column=@Column(name="createdDay")),
-	  })
+	@Convert(converter=DateConverter.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -116,12 +111,7 @@ public class Task implements Serializable {
 		this.context = context;
 	}
 	
-	@Embedded
-	@AttributeOverrides({
-	    @AttributeOverride(name="year",column=@Column(name="dueYear")),
-	    @AttributeOverride(name="month",column=@Column(name="dueMonth")),
-	    @AttributeOverride(name="day",column=@Column(name="dueDay")),
-	  })
+	@Convert(converter=DateConverter.class)
 	public Date getDueDate() {
 		return dueDate;
 	}
@@ -151,12 +141,7 @@ public class Task implements Serializable {
 		}
 	}
 	
-	@Embedded
-	@AttributeOverrides({
-	    @AttributeOverride(name="year",column=@Column(name="completedYear")),
-	    @AttributeOverride(name="month",column=@Column(name="completedMonth")),
-	    @AttributeOverride(name="day",column=@Column(name="completedDay")),
-	  })
+	@Convert(converter=DateConverter.class)
 	public Date getCompletedDate() {
 		return completedDate;
 	}
