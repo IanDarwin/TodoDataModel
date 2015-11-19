@@ -31,6 +31,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<javase.version>1.8</javase.version>
+		<javaee.version>7.0</javaee.version>
 		<maven.compiler.source>${javase.version}</maven.compiler.source>
 		<maven.compiler.target>${javase.version}</maven.compiler.target>
 		<maven.compiler.testSource>${javase.version}</maven.compiler.testSource>
@@ -38,12 +39,13 @@
 	</properties>
 
 	<dependencies>
+		<!-- Java EE API - just for JPA -->
 		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
+			<groupId>javax</groupId>    
+			<artifactId>javaee-web-api</artifactId>    
+			<version>${javaee.version}</version>  
 			<scope>provided</scope>
-		</dependency>
+		</dependency> 
 
 		<!-- JPA needing a driver, let's use Hibernate -->
 		<dependency>
