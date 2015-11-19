@@ -2,6 +2,8 @@ ToDo Task Model
 ===========
 
 This is a Java/JPA model for the ToDo.txt Task format.
+You MUST have JPA 2.1 available to compile this (should be no
+problem as it's included in Java EE 7+).
 
 What works:
 - parsing simple tasks
