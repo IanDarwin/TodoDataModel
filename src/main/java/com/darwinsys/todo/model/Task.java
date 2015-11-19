@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
@@ -14,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.darwinsys.todo.database.PriorityConverter;
 
 /**
  * One ToDo item or "task".
@@ -65,17 +68,8 @@ public class Task implements Serializable {
 		this.id = id;
 	}
 	
-	/**
-	 * IFF you are using JPA to create your database, you MUST create
-	 * the "priority" type first! For Postgresql the syntax was
-	 * CREATE TYPE Priority AS ENUM ('Top', 'High', 'Medium', 'Low');
-	 * This way we can have nice strings in the database AND have them
-	 * sorted automatically by the database.
-	 * If you don't have enum types in your database, admit that it's time
-	 * to outgrow your toys, and use a real database. Like postgresql.
-	 */
-	// @Column(columnDefinition="priority")
-	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.ORDINAL)
+	@Convert(converter=PriorityConverter.class)
 	public Priority getPriority() {
 		return priority;
 	}
