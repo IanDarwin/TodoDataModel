@@ -38,6 +38,7 @@ public class Task implements Serializable {
 	Status status;
 	Date completedDate = null; // when you actually did it
 	long modified = System.currentTimeMillis();	// tstamp (UTC!) when last modified.
+	String description;
 	
 	public Task() {
 		super();
@@ -82,6 +83,14 @@ public class Task implements Serializable {
 		this.name = name;
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Convert(converter=DateConverter.class)
 	public Date getCreationDate() {
 		return creationDate;
@@ -181,17 +190,15 @@ public class Task implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((completedDate == null) ? 0 : completedDate.hashCode());
+		result = prime * result + ((completedDate == null) ? 0 : completedDate.hashCode());
 		result = prime * result + ((context == null) ? 0 : context.hashCode());
-		result = prime * result
-				+ ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + (int) (modified ^ (modified >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((priority == null) ? 0 : priority.hashCode());
+		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
 		result = prime * result + ((project == null) ? 0 : project.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
@@ -221,6 +228,11 @@ public class Task implements Serializable {
 				return false;
 		} else if (!creationDate.equals(other.creationDate))
 			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (dueDate == null) {
 			if (other.dueDate != null)
 				return false;
@@ -228,15 +240,14 @@ public class Task implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
+		if (modified != other.modified)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (priority == null) {
-			if (other.priority != null)
-				return false;
-		} else if (!priority.equals(other.priority))
+		if (priority != other.priority)
 			return false;
 		if (project == null) {
 			if (other.project != null)
