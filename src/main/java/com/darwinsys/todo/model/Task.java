@@ -2,12 +2,7 @@ package com.darwinsys.todo.model;
 
 import java.io.Serializable;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.Convert;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

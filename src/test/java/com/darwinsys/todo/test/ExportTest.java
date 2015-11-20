@@ -1,13 +1,16 @@
 package com.darwinsys.todo.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.darwinsys.todo.converters.ExportText;
-import com.darwinsys.todo.model.*;
+import com.darwinsys.todo.model.Date;
+import com.darwinsys.todo.model.Export;
+import com.darwinsys.todo.model.Priority;
+import com.darwinsys.todo.model.Task;
 
 public class ExportTest {
 

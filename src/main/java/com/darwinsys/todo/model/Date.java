@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import javax.persistence.Embeddable;
-
 /*
  * Simple Date for Tasks: only has Year, Month, and Day.
  * Month is number the human way, starting at one.

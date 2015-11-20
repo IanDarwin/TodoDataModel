@@ -1,6 +1,6 @@
 package com.darwinsys.todo.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

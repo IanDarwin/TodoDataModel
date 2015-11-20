@@ -1,11 +1,16 @@
 package com.darwinsys.todo.test;
 
-import javax.persistence.*;
+import static org.junit.Assert.assertEquals;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.darwinsys.todo.model.Task;
-
-import org.junit.*;
-import static org.junit.Assert.*;
 
 public class DbTest {
 	private static EntityManagerFactory entityManagerFactory;
