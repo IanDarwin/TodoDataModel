@@ -3,8 +3,10 @@ package com.darwinsys.todo.test;
 import static org.junit.Assert.*;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -15,7 +17,15 @@ import com.darwinsys.todo.model.Date;
 
 public class DateSerializeTest {
 	
-	static final String FILENAME = "/tmp/sss"; // XXX use file.makeTempFile()
+	static final File TEMPFILE;
+	static {
+		try {
+			TEMPFILE = File.createTempFile("abc", "def");
+			TEMPFILE.delete();
+		} catch(IOException e) {
+			throw new ExceptionInInitializerError("Canna create temp file");
+		}
+	}
 
 	final Date origDate = new Date(2014, 05, 06);
 	@Before
@@ -26,12 +36,12 @@ public class DateSerializeTest {
 	public void test() throws Exception {
 		ObjectOutputStream os = new ObjectOutputStream(
                 new BufferedOutputStream(
-                        new FileOutputStream(FILENAME)));
+                        new FileOutputStream(TEMPFILE)));
         os.writeObject(origDate);
         os.close();
         
         ObjectInputStream is = new ObjectInputStream(
-                new FileInputStream(FILENAME));
+                new FileInputStream(TEMPFILE));
         Date d2 = (Date) is.readObject();
         is.close();
         System.out.println(d2);
