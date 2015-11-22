@@ -3,6 +3,8 @@ package com.darwinsys.todo.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 
 import com.darwinsys.todo.model.Date;
@@ -11,6 +13,14 @@ public class DateTest {
 
 	private static final String DATE_STRING = "2013-06-01";
 	Date d = new Date(2013,06,01);
+	
+	@Test
+	public void testDateNoArg() {
+		Date dx = new Date();
+		assertEquals(dx.getYear(), Calendar.getInstance().get(Calendar.YEAR));
+		assertEquals(dx.getMonth(), Calendar.getInstance().get(Calendar.MONTH));
+		assertEquals(dx.getDay(), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+	}
 
 	@Test
 	public void testDateIntIntInt() {
@@ -32,7 +42,7 @@ public class DateTest {
 	}
 
 	@Test
-	public void testDateDate() {
+	public void testDateFromJavaUtilDate() {
 		java.util.Date jud = new java.util.Date();
 		Date myDate = new Date(jud);
 		assertTrue(myDate.getYear() == 1900 + jud.getYear());

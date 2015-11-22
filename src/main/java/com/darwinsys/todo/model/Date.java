@@ -1,6 +1,7 @@
 package com.darwinsys.todo.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,7 +18,9 @@ public class Date implements Serializable {
 
 	/** Construct a Date for today */
 	public Date() {
-		this(new java.util.Date());
+		this(Calendar.getInstance().get(Calendar.YEAR),
+			Calendar.getInstance().get(Calendar.MONTH),
+				Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 	}
 	
 	/** Construct a Date for the given y-m-d */
@@ -30,7 +33,7 @@ public class Date implements Serializable {
 
 	/** Construct a Date from a java.util.Date */
 	public Date(java.util.Date date) {
-		this(1900 + date.getYear(), date.getMonth() + 1, date.getDay());
+		this(1900 + date.getYear(), date.getMonth() + 1, date.getDay() + 1);
 		validate();
 	}
 
