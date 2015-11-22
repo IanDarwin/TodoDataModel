@@ -150,6 +150,9 @@ public class Task implements Serializable {
 	public boolean isComplete() {
 		return status == Status.COMPLETE;
 	}
+	public void toggleComplete() {
+		setStatus(!isComplete() ? Status.COMPLETE : Status.ACTIVE);
+	}
 	
 	@Convert(converter=DateConverter.class)
 	public Date getCompletedDate() {
