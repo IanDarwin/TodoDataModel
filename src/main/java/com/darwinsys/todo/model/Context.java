@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Context {
+public class Context implements Comparable<Context> {
 	long id;
 	String name;
 
@@ -64,5 +64,16 @@ public class Context {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Context o) {
+		if (this.id < o.id) {
+			return -1;
+		}
+		if (this.id > o.id) {
+			return +1;
+		}
+		return 0;
 	}
 }
