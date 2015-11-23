@@ -26,8 +26,6 @@ public class Task implements Serializable {
 	
 	private static final long serialVersionUID = 4917727200248757334L;
 	
-	private static final char SPACE = ' ';
-
 	private static final char PROJECT = '+', CONTEXT = '@';
 	long id;
 	Priority priority; // Enum; how important?
@@ -181,16 +179,20 @@ public class Task implements Serializable {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		if (status == Status.COMPLETE) {
-			sb.append('x').append(SPACE).append(getCompletedDate()).append(SPACE);
+			sb.append('x');
+			if (getCompletedDate() != null) {
+				sb.append(' ').append(getCompletedDate()).append(' ');
+			}
 		}
-		sb.append(getCreationDate());
-		sb.append(SPACE);
-		sb.append(name);
+		if (getCreationDate() != null) {
+			sb.append(getCreationDate());
+		}
+		sb.append(' ').append(name);
 		if (getProject() != null) {
-			sb.append(SPACE).append(PROJECT).append(project);
+			sb.append(' ').append(PROJECT).append(project);
 		}
 		if (getContext() != null) {
-			sb.append(SPACE).append(CONTEXT).append(context);
+			sb.append(' ').append(CONTEXT).append(context);
 		}
 		return sb.toString();
 	}
