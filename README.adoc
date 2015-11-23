@@ -16,6 +16,10 @@ problem as it's included in Java EE 7+).
 
 == What's not right yet:
 
+. It is known that Eclipse flags a _false_ error due to the lack of
+persistence.xml; this file MUST NOT be here (nor in the output Jar file)
+as different implementations such as ../TodoService 
+must be allowed to provide it instead.
 . Must remove Project/Context when parsing input, else you get
   (A) Call Mom @Home @Home @Home...
 
