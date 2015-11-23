@@ -170,6 +170,7 @@ public class Task implements Serializable {
 		status = Status.COMPLETE;
 	}
 	
+	final static char[] prioLetters = "ABCDEFG".toCharArray();
 	
 	/** ToString converts to String but in todo.txt format! 
 	 * A fully-fleshed-out example from todotxt.com:
@@ -183,6 +184,9 @@ public class Task implements Serializable {
 			if (getCompletedDate() != null) {
 				sb.append(' ').append(getCompletedDate()).append(' ');
 			}
+		}
+		if (getPriority() != null) {
+			sb.append('(').append(prioLetters[getPriority().ordinal()]).append(')').append(' ');
 		}
 		if (getCreationDate() != null) {
 			sb.append(getCreationDate());

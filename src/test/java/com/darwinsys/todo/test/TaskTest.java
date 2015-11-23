@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.darwinsys.todo.model.Context;
 import com.darwinsys.todo.model.Date;
+import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Project;
 import com.darwinsys.todo.model.Task;
 
@@ -50,7 +51,8 @@ public class TaskTest {
 		t.setName(GET_THE_LEAD_OUT);
 		t.setContext(CONTEXT);
 		t.setProject(PROJECT);
-		assertEquals("toString", today + SPACE + "Get the lead out" + SPACE + "+" + PROJECT + ' ' + "@" + CONTEXT, 
+		t.setPriority(Priority.High);
+		assertEquals("toString", "(B) " + today + SPACE + "Get the lead out" + SPACE + "+" + PROJECT + ' ' + "@" + CONTEXT, 
 				t.toString());
 	}
 	
