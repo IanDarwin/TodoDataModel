@@ -37,4 +37,12 @@ public class Hint {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+	@Override
+	public String toString() {
+		if (author == null)
+			return getHint();
+		else
+			return getHint() + " -- " + getAuthor();
+	}
 }
