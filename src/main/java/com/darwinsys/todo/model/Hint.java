@@ -6,7 +6,6 @@ import javax.persistence.*;
  * A Hint is one little note to help people improve their use of
  * ToDo list management.
  */
-
 @Entity
 public class Hint {
 	long id;
@@ -40,7 +39,7 @@ public class Hint {
 
 	@Override
 	public String toString() {
-		if (author == null)
+		if (author == null || author.length() == 0)
 			return getHint();
 		else
 			return getHint() + " -- " + getAuthor();
