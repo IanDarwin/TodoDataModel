@@ -1,5 +1,7 @@
 package com.darwinsys.todo.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -7,7 +9,7 @@ import javax.persistence.*;
  * ToDo list management.
  */
 @Entity
-public class Hint {
+public class Hint implements Serializable {
 	long id;
 	String hint;
 	String author;
