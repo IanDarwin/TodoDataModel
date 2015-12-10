@@ -4,7 +4,7 @@
 
 	<groupId>com.darwinsys</groupId>
 	<artifactId>todo-datamodel</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 	<inceptionYear>2005</inceptionYear>
 
@@ -30,7 +30,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javase.version>1.8</javase.version>
+		<javase.version>1.7</javase.version>
 		<javaee.version>7.0</javaee.version>
 		<maven.compiler.source>${javase.version}</maven.compiler.source>
 		<maven.compiler.target>${javase.version}</maven.compiler.target>
