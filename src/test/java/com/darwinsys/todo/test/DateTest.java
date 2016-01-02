@@ -12,13 +12,13 @@ import com.darwinsys.todo.model.Date;
 public class DateTest {
 
 	private static final String DATE_STRING = "2013-06-01";
-	Date d = new Date(2013,06,01);
+	Date d = new Date(2013,06,01); // Actually means June
 	
 	@Test
 	public void testDateNoArg() {
 		Date dx = new Date();
 		assertEquals(dx.getYear(), Calendar.getInstance().get(Calendar.YEAR));
-		assertEquals(dx.getMonth(), Calendar.getInstance().get(Calendar.MONTH));
+		assertEquals(dx.getMonth(), Calendar.getInstance().get(Calendar.MONTH) + 1);
 		assertEquals(dx.getDay(), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 	}
 
