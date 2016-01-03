@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.darwinsys.todo.database.DateConverter;
 import com.darwinsys.todo.database.PriorityConverter;
@@ -141,12 +140,8 @@ public class Task implements Serializable {
 		}
 	}
 	
-	@Transient // derived
-	public boolean isComplete() {
-		return status == Status.COMPLETE;
-	}
 	public void toggleComplete() {
-		setStatus(!isComplete() ? Status.COMPLETE : Status.ACTIVE);
+		setStatus(!(status == Status.COMPLETE) ? Status.COMPLETE : Status.ACTIVE);
 	}
 	
 	@Convert(converter=DateConverter.class)
