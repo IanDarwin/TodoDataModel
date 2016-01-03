@@ -71,9 +71,6 @@ public class Task implements Serializable {
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
-	public void setPriority(String priority) {
-		setPriority(Priority.valueOf(priority));
-	}
 
 	public String getName() {
 		return name;
