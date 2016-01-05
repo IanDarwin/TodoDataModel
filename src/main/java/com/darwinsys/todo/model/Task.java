@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.metawidget.inspector.annotation.UiComesAfter;
+import org.metawidget.inspector.annotation.UiLabel;
+
 import com.darwinsys.todo.database.DateConverter;
 import com.darwinsys.todo.database.PriorityConverter;
 
@@ -63,7 +66,8 @@ public class Task implements Serializable {
 	}
 	
 	//@Enumerated(EnumType.ORDINAL)
-	@Convert(converter=PriorityConverter.class)
+	@Convert(converter=PriorityConverter.class) // JPA converter
+	@UiComesAfter("description")
 	public Priority getPriority() {
 		return priority;
 	}
@@ -71,6 +75,7 @@ public class Task implements Serializable {
 		this.priority = priority;
 	}
 
+	@UiLabel("Summary")
 	public String getName() {
 		return name;
 	}
@@ -78,6 +83,7 @@ public class Task implements Serializable {
 		this.name = name;
 	}
 	
+	@UiComesAfter("name")
 	public String getDescription() {
 		return description;
 	}
@@ -118,6 +124,7 @@ public class Task implements Serializable {
 		this.dueDate = dueDate;
 	}
 	
+	@UiComesAfter("priority")
 	public Status getStatus() {
 		return status;
 	}
