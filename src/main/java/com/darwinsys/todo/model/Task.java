@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.metawidget.inspector.annotation.UiComesAfter;
+import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiLabel;
 
 import com.darwinsys.todo.database.DateConverter;
@@ -58,6 +59,7 @@ public class Task implements Serializable {
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@UiHidden
 	public long getId() {
 		return id;
 	}
