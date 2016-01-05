@@ -94,7 +94,8 @@ public class Task implements Serializable {
 		this.description = description;
 	}
 
-	@Convert(converter=DateConverter.class)
+	@Convert(converter=DateConverter.class) // JPA
+	@UiComesAfter("project")
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -103,6 +104,7 @@ public class Task implements Serializable {
 	}
 	
 	@ManyToOne
+	@UiComesAfter("context")
 	public Project getProject() {
 		return project;
 	}
@@ -111,6 +113,7 @@ public class Task implements Serializable {
 	}
 	
 	@ManyToOne
+	@UiComesAfter("status")
 	public Context getContext() {
 		return context;
 	}
@@ -118,7 +121,8 @@ public class Task implements Serializable {
 		this.context = context;
 	}
 	
-	@Convert(converter=DateConverter.class)
+	@Convert(converter=DateConverter.class) // JPA
+	@UiComesAfter("modified")
 	public Date getDueDate() {
 		return dueDate;
 	}
@@ -153,7 +157,8 @@ public class Task implements Serializable {
 		setStatus(!(status == Status.COMPLETE) ? Status.COMPLETE : Status.ACTIVE);
 	}
 	
-	@Convert(converter=DateConverter.class)
+	@Convert(converter=DateConverter.class) // JPA
+	@UiComesAfter("dueDate")
 	public Date getCompletedDate() {
 		return completedDate;
 	}
@@ -275,6 +280,7 @@ public class Task implements Serializable {
 		return true;
 	}
 
+	@UiComesAfter("creationDate")
 	public long getModified() {
 		return modified;
 	}
