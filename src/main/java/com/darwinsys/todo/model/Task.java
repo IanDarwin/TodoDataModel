@@ -178,7 +178,8 @@ public class Task implements Serializable {
 	
 	final static char[] prioLetters = "ABCDEFG".toCharArray();
 	
-	/** ToString converts to String but in todo.txt format! 
+	/** 
+	 * ToString converts to String but in todo.txt format! 
 	 * A fully-fleshed-out example from todotxt.com:
 	 * x 2011-03-02 2011-03-01 Review Tim's pull request +TodoTxtTouch @github 
 	 */
