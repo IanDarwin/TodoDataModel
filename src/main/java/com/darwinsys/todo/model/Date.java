@@ -7,8 +7,9 @@ import java.util.Scanner;
 
 /*
  * Simple Date for Tasks: only has Year, Month, and Day.
- * Month is number the human way, starting at one.
  * This should be destroyed and get replaced with java.time.LocalDate.
+ * Month is number the human way, starting at one.
+ * Immutable, as dates should be.
  */
 public class Date implements Serializable {
 
@@ -86,24 +87,12 @@ public class Date implements Serializable {
 		return year;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
-	}
-
 	public int getMonth() {
 		return month;
 	}
 
-	public void setMonth(int month) {
-		this.month = month;
-	}
-
 	public int getDay() {
 		return day;
-	}
-
-	public void setDay(int day) {
-		this.day = day;
 	}
 
 	@Override
