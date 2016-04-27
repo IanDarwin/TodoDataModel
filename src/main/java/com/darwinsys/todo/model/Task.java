@@ -19,6 +19,8 @@ import org.metawidget.inspector.annotation.UiLabel;
 import com.darwinsys.todo.database.DateConverter;
 import com.darwinsys.todo.database.PriorityConverter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * One ToDo item or "task".
  * See http://todotxt.com/ and 
@@ -77,7 +79,7 @@ public class Task implements Serializable {
 	 * user might have 2, or 6, different mobile devices...).
 	 * @return The ID that this has on their device.
 	 */
-	@Transient @UiHidden
+	@Transient @UiHidden @JsonIgnore
 	public Long getDeviceId() {
 		return deviceId;
 	}
