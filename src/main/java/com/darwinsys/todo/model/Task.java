@@ -2,6 +2,7 @@ package com.darwinsys.todo.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.metawidget.inspector.annotation.UiComesAfter;
 import org.metawidget.inspector.annotation.UiHidden;
@@ -30,7 +32,8 @@ public class Task implements Serializable {
 	private static final long serialVersionUID = 4917727200248757334L;
 	
 	private static final char PROJECT = '+', CONTEXT = '@';
-	long id;
+	long serverId;		// Primary key: non-nullable
+	Long deviceId;		// Not used server-side, so nullable
 	Priority priority; // Enum; how important?
 	String name;	// what to do
 	Date creationDate = new Date(); // when you decided you had to do it
@@ -59,14 +62,30 @@ public class Task implements Serializable {
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="id")
 	@UiHidden
-	public long getId() {
-		return id;
+	public long getServerId() {
+		return serverId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setServerId(long id) {
+		this.serverId = id;
 	}
 	
+	/**
+	 * This field is for use of mobile devices, and is NOT saved
+	 * in the server database (obviously, if you consider that a
+	 * user might have 2, or 6, different mobile devices...).
+	 * @return The ID that this has on their device.
+	 */
+	@Transient @UiHidden
+	public Long getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(Long deviceId) {
+		this.deviceId = deviceId;
+	}
+
 	//@Enumerated(EnumType.ORDINAL)
 	@Convert(converter=PriorityConverter.class) // JPA converter
 	@UiComesAfter("description")
@@ -217,7 +236,7 @@ public class Task implements Serializable {
 		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (serverId ^ (serverId >>> 32));
 		result = prime * result + (int) (modified ^ (modified >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
@@ -260,7 +279,7 @@ public class Task implements Serializable {
 				return false;
 		} else if (!dueDate.equals(other.dueDate))
 			return false;
-		if (id != other.id)
+		if (serverId != other.serverId)
 			return false;
 		if (modified != other.modified)
 			return false;

@@ -32,7 +32,7 @@ public class DbTest {
 		entityManager.getTransaction().begin();
 		entityManager.persist(task);
 		entityManager.getTransaction().commit();
-		long id = task.getId();
+		long id = task.getServerId();
 		Task t2 = entityManager.find(Task.class, id);
 		assertEquals(task, t2);
 	}
