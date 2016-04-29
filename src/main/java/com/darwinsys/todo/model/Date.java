@@ -16,6 +16,10 @@ public class Date implements Serializable {
 	private static final long serialVersionUID = -5944728253397921658L;
 	
 	int year, month, day;
+	
+	public static Date now() {
+		return new Date();
+	}
 
 	/** Construct a Date for today */
 	public Date() {
@@ -33,6 +37,7 @@ public class Date implements Serializable {
 	}
 
 	/** Construct a Date from a java.util.Date */
+	@SuppressWarnings("deprecation")
 	public Date(java.util.Date date) {
 		this(1900 + date.getYear(), date.getMonth() + 1, date.getDay() + 1);
 		validate();
@@ -75,6 +80,7 @@ public class Date implements Serializable {
 	}
 
 	/** Convert a Date to a java.util.Date() */
+	@SuppressWarnings("deprecation")
 	public java.util.Date asJULDate() {
 		return new java.util.Date(year, month - 1, day);
 	}
@@ -93,6 +99,25 @@ public class Date implements Serializable {
 
 	public int getDay() {
 		return day;
+	}
+	
+	/** Checks if this date-time is after the specified date. */
+	public boolean isAfter(Date other) {
+		return year < other.year
+				|| month < other.month
+				|| day < other.day;
+	}
+	/** Checks if this date-time is after the specified date. */
+	public boolean isBefore(Date other) {
+		return year > other.year
+				|| month > other.month
+				|| day > other.day;
+	}
+	/** Checks if this date-time is the same as the specified date. */
+	public boolean isEqual(Date other) {
+		return year == other.year
+				&& month == other.month
+				&& day == other.day;
 	}
 
 	@Override

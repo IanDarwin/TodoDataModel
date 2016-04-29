@@ -1,6 +1,7 @@
 package com.darwinsys.todo.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
@@ -13,13 +14,16 @@ public class DateTest {
 
 	private static final String DATE_STRING = "2013-06-01";
 	Date d = new Date(2013,06,01); // Actually means June
+	Date d0 = new Date(2013, 05, 25);
+	Date d2 = new Date(2014, 01, 01);
 	
 	@Test
 	public void testDateNoArg() {
 		Date dx = new Date();
-		assertEquals(dx.getYear(), Calendar.getInstance().get(Calendar.YEAR));
-		assertEquals(dx.getMonth(), Calendar.getInstance().get(Calendar.MONTH) + 1);
-		assertEquals(dx.getDay(), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+		final Calendar calInstance = Calendar.getInstance();
+		assertEquals(dx.getYear(), calInstance.get(Calendar.YEAR));
+		assertEquals(dx.getMonth(), calInstance.get(Calendar.MONTH) + 1);
+		assertEquals(dx.getDay(), calInstance.get(Calendar.DAY_OF_MONTH));
 	}
 
 	@Test
@@ -41,6 +45,7 @@ public class DateTest {
 		assertEquals(d, dd);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testDateFromJavaUtilDate() {
 		java.util.Date jud = new java.util.Date();
@@ -49,11 +54,32 @@ public class DateTest {
 		assertTrue(myDate.getMonth() == 1 + jud.getMonth());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testGetDate() {
 		java.util.Date jud = d.asJULDate();
 		assertEquals(2013, jud.getYear());
 		assertEquals(6-1, jud.getMonth());
+	}
+	
+	@Test
+	public void testIsBefore() {
+		assertTrue(d0.isBefore(d));
+		assertTrue(d.isBefore(d2));
+	}
+	
+	@Test
+	public void testIsAfter() {
+		assertTrue(d.isAfter(d0));
+		assertTrue(d2.isAfter(d));
+	}
+	
+	@Test
+	public void testIsEqual() {
+		assertTrue(d0.isEqual(d0));
+		assertTrue(d.isEqual(d));
+		assertTrue(d2.isEqual(d2));
+		assertFalse(d.isEqual(d2));
 	}
 
 	@Test
