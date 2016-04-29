@@ -17,10 +17,8 @@ public class Date implements Serializable {
 	
 	int year, month, day;
 	
-	public static Date now() {
-		return new Date();
-	}
-
+	// CONSTRUCTORS
+	
 	/** Construct a Date for today */
 	public Date() {
 		this(Calendar.getInstance().get(Calendar.YEAR),
@@ -47,6 +45,18 @@ public class Date implements Serializable {
 	public Date(String dateString) {
 		populate(dateString);
 	}
+	
+	// STATIC FACTORIES
+	
+	public static Date now() {
+		return new Date();
+	}
+	
+	public static Date forTimestamp(long time) {
+		return new Date(new java.util.Date(time));
+	}
+
+	// Other methods...
 	
 	private void populate(String dateString) {
 		if (dateString == null || dateString.length() == 0) {
