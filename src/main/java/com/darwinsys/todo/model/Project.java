@@ -8,6 +8,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Project implements Serializable {
+
+	private static final long serialVersionUID = 11594675624297703L;
 	long id;
 	String name;
 

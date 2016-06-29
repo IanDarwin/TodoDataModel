@@ -10,6 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 public class Hint implements Serializable {
+
+	private static final long serialVersionUID = 8438161346456329618L;
 	long id;
 	String hint;
 	String author;

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Context implements Comparable<Context>, Serializable {
+
+	private static final long serialVersionUID = 1208574258185845564L;
 	long id;
 	String name;
 
