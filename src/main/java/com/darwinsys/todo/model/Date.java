@@ -26,7 +26,11 @@ public class Date implements Serializable {
 				Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 	}
 	
-	/** Construct a Date for the given y-m-d */
+	/** Construct a Date for the given y-m-d
+	 * @param year The year
+	 * @param month The Month, 1-origin
+	 * @param day The Year, 1-origin
+	 */
 	public Date(int year, int month, int day) {
 		this.year = year;
 		this.month = month;
@@ -34,14 +38,18 @@ public class Date implements Serializable {
 		validate();
 	}
 
-	/** Construct a Date from a java.util.Date */
+	/** Construct a Date from a java.util.Date
+	 * @param date the java.util.Date to base this Date on
+	 */
 	@SuppressWarnings("deprecation")
 	public Date(java.util.Date date) {
 		this(1900 + date.getYear(), date.getMonth() + 1, date.getDay() + 1);
 		validate();
 	}
 
-	/** Construct a date from a YYYY-mm-DD String */
+	/** Construct a date from a YYYY-mm-DD String
+	 * @param dateString The YYYY-MM-DD date string
+	 */
 	public Date(String dateString) {
 		populate(dateString);
 	}
@@ -80,6 +88,9 @@ public class Date implements Serializable {
 		validate();
 	}
 
+	/**
+	 * Private - validate fields, throws IAE if not valid
+	 */
 	private void validate() {
 		if (month < 1 || month > 12) {
 			throw new IllegalArgumentException("Invalid month: " + month);
@@ -89,7 +100,9 @@ public class Date implements Serializable {
 		}
 	}
 
-	/** Convert a Date to a java.util.Date() */
+	/** Convert a Date to a java.util.Date
+	 * @return The Date as a java.util.Date
+	 */
 	@SuppressWarnings("deprecation")
 	public java.util.Date asJULDate() {
 		return new java.util.Date(year, month - 1, day);
@@ -111,19 +124,28 @@ public class Date implements Serializable {
 		return day;
 	}
 	
-	/** Checks if this date-time is after the specified date. */
+	/** Checks if this date-time is after the specified date.
+	 * @param other The date to compare with
+	 * @return True iff this date-time is after 'other'
+	 */
 	public boolean isAfter(Date other) {
 		return year < other.year
 				|| month < other.month
 				|| day < other.day;
 	}
-	/** Checks if this date-time is after the specified date. */
+	/** Checks if this date-time is before the specified date.
+	 * @param other The date to compare with
+	 * @return True iff this date-time is before 'other'
+	 */
 	public boolean isBefore(Date other) {
 		return year > other.year
 				|| month > other.month
 				|| day > other.day;
 	}
-	/** Checks if this date-time is the same as the specified date. */
+	/** Checks if this date-time is the same as the specified date.
+	 * @param other The date to compare with
+	 * @return True iff this date-time is equal to 'other'
+	 */
 	public boolean isEqual(Date other) {
 		return year == other.year
 				&& month == other.month

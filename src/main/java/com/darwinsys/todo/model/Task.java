@@ -160,8 +160,8 @@ public class Task implements Serializable {
 	 * set completion to true or false, and side-effect set completion date
 	 * to today or to null, but if setting to true and client already set
 	 * completion data, leave well enough alone.
-	 * XXX This may not play well with JPA
-	 * @param complete
+	 * This may or may not play well with JPA
+	 * @param status - the status enumeration
 	 */
 	public void setStatus(Status status) {
 		this.status = status;
@@ -203,6 +203,7 @@ public class Task implements Serializable {
 	 * ToString converts to String but in todo.txt format! 
 	 * A fully-fleshed-out example from todotxt.com:
 	 * x 2011-03-02 2011-03-01 Review Tim's pull request +TodoTxtTouch @github 
+	 * @return the Task in todo.txt format
 	 */
 	@Override
 	public String toString() {
