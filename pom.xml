@@ -8,6 +8,11 @@
 	<packaging>jar</packaging>
 	<inceptionYear>2005</inceptionYear>
 
+	<!-- This doesn't really need to be in Maven Central but it's here for the benefit of ME^H^H
+	 *** people who try to build other Todo parts without doing "mvn install" here 
+	 *** and bug me^H^H^H^H^H^H^H^H^H.
+	 -->
+
 	<name>Data Model for ToDo project(s)</name>
 	<url>http://darwinsys.com</url>
 	<licenses>
