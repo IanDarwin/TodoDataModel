@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/** The Context in which a Todo item is to be done */
 @Entity
 public class Context implements Comparable<Context>, Serializable {
 

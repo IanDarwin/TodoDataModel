@@ -5,6 +5,7 @@ import javax.persistence.Converter;
 
 import com.darwinsys.todo.model.Priority;
 
+/** JPA Converter for our Priority enum */
 @Converter
 public class PriorityConverter implements AttributeConverter<Priority, Integer> {
 

@@ -12,6 +12,9 @@ import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Project;
 import com.darwinsys.todo.model.Task;
 
+/**
+ * Tests for Task itself.
+ */
 public class TaskTest {
 	
 	private static final String GET_THE_LEAD_OUT = "Get the lead out";

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/** The Project that a Todo is part of */
 @Entity
 public class Project implements Serializable {
 

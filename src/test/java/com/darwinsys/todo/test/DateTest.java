@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.darwinsys.todo.model.Date;
 
+/** Some tests of our custom Date class */
 public class DateTest {
 
 	private static final String DATE_STRING = "2013-06-01";

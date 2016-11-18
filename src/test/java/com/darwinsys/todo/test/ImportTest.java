@@ -16,6 +16,9 @@ import com.darwinsys.todo.model.Import;
 import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Task;
 
+/**
+ * Some tests of import functionality.
+ */
 @RunWith(Parameterized.class)
 public class ImportTest {
 

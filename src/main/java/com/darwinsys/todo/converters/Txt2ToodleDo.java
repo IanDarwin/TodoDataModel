@@ -19,7 +19,7 @@ public class Txt2ToodleDo {
 		}
 	}
 
-	private static List<String> fileToList(String fileName) throws IOException {
+	public static List<String> fileToList(String fileName) throws IOException {
 		List<String> ret = new ArrayList<String>(100);
 		BufferedReader is = new BufferedReader(new FileReader(fileName));
 		String line;
@@ -32,5 +32,4 @@ public class Txt2ToodleDo {
 		}
 		return ret;
 	}
-
 }

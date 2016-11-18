@@ -27,7 +27,8 @@ public class DateSerializeTest {
 		}
 	}
 
-	final Date origDate = new Date(2014, 05, 06);
+	final Date origDate = new Date(2014, 05, 06); // Custom date class
+
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -47,5 +48,4 @@ public class DateSerializeTest {
         System.out.println(d2);
         assertEquals(origDate.getYear(), d2.getYear());
 	}
-
 }

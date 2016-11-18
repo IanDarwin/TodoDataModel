@@ -5,6 +5,7 @@ import javax.persistence.Converter;
 
 import com.darwinsys.todo.model.Date;
 
+/** JPA Converter for our custom Date class */
 @Converter
 public class DateConverter implements AttributeConverter<Date, String> {
 

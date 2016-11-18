@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Code to import plain-text ToDo files into our Todo model.
+ */
 public class Import {
 	
 	public static final Pattern REGEX = Pattern.compile(

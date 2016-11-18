@@ -12,6 +12,7 @@ import com.darwinsys.todo.model.Export;
 import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Task;
 
+/** Some tests of Export code */
 public class ExportTest {
 
 	private final static String TASK_NAME = "Get laundry done";

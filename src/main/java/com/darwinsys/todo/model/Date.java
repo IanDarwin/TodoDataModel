@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/*
+/**
  * Simple Date for Tasks: only has Year, Month, and Day.
- * This should be destroyed and get replaced with java.time.LocalDate.
+ * This should be destroyed and be replaced with java.time.LocalDate.
  * Month is number the human way, starting at one.
  * Immutable, as dates should be.
  */

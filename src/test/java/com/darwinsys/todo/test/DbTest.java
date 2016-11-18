@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.darwinsys.todo.model.Task;
 
+/** Simple test of database access */
 public class DbTest {
 	private static EntityManagerFactory entityManagerFactory;
 	private EntityManager entityManager;
