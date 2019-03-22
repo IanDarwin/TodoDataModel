@@ -4,7 +4,7 @@
 
 	<groupId>com.darwinsys</groupId>
 	<artifactId>todo-datamodel</artifactId>
-	<version>1.0.10</version>
+	<version>1.0.11</version>
 	<packaging>jar</packaging>
 	<inceptionYear>2005</inceptionYear>
 	<description>The data model classes for TodoMore, the minimalist ToDo Manager.

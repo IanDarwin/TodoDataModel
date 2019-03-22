@@ -73,12 +73,6 @@ public class Context implements Comparable<Context>, Serializable {
 
 	@Override
 	public int compareTo(Context o) {
-		if (this.id < o.id) {
-			return -1;
-		}
-		if (this.id > o.id) {
-			return +1;
-		}
-		return 0;
+		return name.compareTo(o.name);
 	}
 }
