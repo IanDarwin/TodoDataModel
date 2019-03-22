@@ -37,6 +37,10 @@ public class Project implements Serializable {
 		this.name = name;
 	}
 
+	public String toString() {
+		return getName();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
