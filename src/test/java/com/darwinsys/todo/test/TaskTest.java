@@ -4,12 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.time.LocalDate;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import com.darwinsys.todo.model.Context;
-import com.darwinsys.todo.model.Date;
 import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Project;
+import com.darwinsys.todo.model.Status;
 import com.darwinsys.todo.model.Task;
 
 /**
@@ -21,8 +24,13 @@ public class TaskTest {
 	private static final char SPACE = ' ';
 	private static final Project PROJECT = new Project("Plumbing");
 	private static final Context CONTEXT = new Context("Home");
-	Task t = new Task();
-	String today = new Date().toString();
+	String today = LocalDate.now().toString();
+	Task t;
+	
+	@Before
+	public void setup() {
+		t = new Task();
+	}
 	
 	@Test
 	public void testConstructor() {
@@ -32,6 +40,7 @@ public class TaskTest {
 	@Test
 	public void testSetCompletedSetsCompletionDate() {
 		t.complete();
+		assertEquals(Status.COMPLETE, t.getStatus());
 		assertNotNull("completion goo", t.getCompletedDate());
 	}
 	
@@ -46,7 +55,7 @@ public class TaskTest {
 	@Test
 	public void testSimpleToString() {
 		t.setName(GET_THE_LEAD_OUT);
-		assertEquals("toString", today + ' ' + GET_THE_LEAD_OUT, t.toString());
+		assertEquals("toString", "(A) " + today + ' ' + GET_THE_LEAD_OUT, t.toString());
 	}
 
 	@Test
@@ -63,6 +72,6 @@ public class TaskTest {
 	public void testCompleteToString() {
 		t.setName(GET_THE_LEAD_OUT);
 		t.complete();
-		assertEquals("toString", "x" + SPACE + today + SPACE + today + ' ' + GET_THE_LEAD_OUT, t.toString());
+		assertEquals("toString", "x" + SPACE + today + SPACE + "(A) " + today + ' ' + GET_THE_LEAD_OUT, t.toString());
 	}
 }

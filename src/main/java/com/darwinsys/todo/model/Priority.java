@@ -5,5 +5,6 @@ public enum Priority {
 	Top,
 	High,
 	Medium,
-	Low
+	Low;
+	static final Priority DEFAULT = Priority.Top;
 }

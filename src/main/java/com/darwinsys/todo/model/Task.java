@@ -1,6 +1,7 @@
 package com.darwinsys.todo.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -10,15 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.metawidget.inspector.annotation.UiComesAfter;
 import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiLabel;
 
-import com.darwinsys.todo.database.DateConverter;
 import com.darwinsys.todo.database.PriorityConverter;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -34,22 +35,21 @@ public class Task implements Serializable {
 	private static final long serialVersionUID = 4917727200248757334L;
 	
 	private static final char PROJECT = '+', CONTEXT = '@';
-	long serverId;		// Primary key: non-nullable
-	Long deviceId;		// Not used server-side, so nullable
-	Priority priority; // Enum; how important?
+	long serverId;		// Primary key: non-nullable server side
+	Long deviceId;		// PKey on remote device, nullable server-side
+	Priority priority = Priority.DEFAULT; // Enum; how important?
 	String name;	// what to do
-	Date creationDate = new Date(); // when you decided you had to do it
+	LocalDate creationDate = LocalDate.now(); // when you decided you had to do it
 	Project project;	// what this task is part of
 	Context context;	// where to do it
-	Date dueDate;		// when to do it by
-	Status status;
-	Date completedDate = null; // when you actually did it
+	LocalDate dueDate;		// when to do it by
+	Status status = Status.DEFAULT;
+	LocalDate completedDate = null; // when you actually did it
 	long modified = System.currentTimeMillis();	// tstamp (UTC!) when last modified.
 	String description;
 	
 	public Task() {
 		super();
-		creationDate = new Date();
 	}
 	
 	public Task(String name) {
@@ -61,6 +61,11 @@ public class Task implements Serializable {
 		this.name = name;
 		this.project = new Project(project);
 		this.context = new Context(context);
+	}
+
+	public Task(String name, Priority priority) {
+		this.name = name;
+		this.priority = priority;
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -115,12 +120,12 @@ public class Task implements Serializable {
 		this.description = description;
 	}
 
-	@Convert(converter=DateConverter.class) // JPA
 	@UiComesAfter("project")
-	public Date getCreationDate() {
+	@Temporal(TemporalType.DATE)
+	public LocalDate getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
 	
@@ -142,12 +147,12 @@ public class Task implements Serializable {
 		this.context = context;
 	}
 	
-	@Convert(converter=DateConverter.class) // JPA
 	@UiComesAfter("modified")
-	public Date getDueDate() {
+	@Temporal(TemporalType.DATE)
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 	
@@ -167,7 +172,7 @@ public class Task implements Serializable {
 		this.status = status;
 		if (status == Status.COMPLETE) {
 			if (getCompletedDate() == null) {
-				completedDate = new Date();
+				completedDate = LocalDate.now();
 			}
 		} else {
 			setCompletedDate(null);
@@ -178,12 +183,12 @@ public class Task implements Serializable {
 		setStatus(!(status == Status.COMPLETE) ? Status.COMPLETE : Status.ACTIVE);
 	}
 	
-	@Convert(converter=DateConverter.class) // JPA
 	@UiComesAfter("dueDate")
-	public Date getCompletedDate() {
+	@Temporal(TemporalType.DATE)
+	public LocalDate getCompletedDate() {
 		return completedDate;
 	}
-	public void setCompletedDate(Date completedDate) {
+	public void setCompletedDate(LocalDate completedDate) {
 		this.completedDate = completedDate;
 	}
 
@@ -193,8 +198,7 @@ public class Task implements Serializable {
 	}
 	
 	public void complete() {
-		this.completedDate = new Date();
-		status = Status.COMPLETE;
+		setStatus(Status.COMPLETE);
 	}
 	
 	final static char[] prioLetters = "ABCDEFG".toCharArray();

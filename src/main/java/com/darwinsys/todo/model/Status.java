@@ -6,4 +6,5 @@ public enum Status {
 	ACTIVE,
 	DEFERRED,
 	COMPLETE;
+	static final Status DEFAULT = NEW;
 }

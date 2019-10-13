@@ -2,12 +2,13 @@ package com.darwinsys.todo.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.darwinsys.todo.converters.ExportText;
-import com.darwinsys.todo.model.Date;
 import com.darwinsys.todo.model.Export;
 import com.darwinsys.todo.model.Priority;
 import com.darwinsys.todo.model.Task;
@@ -24,7 +25,7 @@ public class ExportTest {
 	public void init() {
 		t.setName(TASK_NAME);
 		t.setPriority(Priority.High);
-		t.setCreationDate(new Date(2013,10,06));
+		t.setCreationDate(LocalDate.of(2013,10,06));
 	}
 
 	@Test @Ignore // don't care about this ATM
