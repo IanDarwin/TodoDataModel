@@ -1,14 +1,18 @@
 package com.darwinsys.todo.converters;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 import com.darwinsys.todo.model.Task;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 public class TaskJacksonSerializer extends StdSerializer<Task> {
-
-	static DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyy/LL/dd");
+	private static final long serialVersionUID = 1L;
+	
+	static DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyy-LL-dd");
      
     public TaskJacksonSerializer() {
         this(null);
@@ -24,10 +28,10 @@ public class TaskJacksonSerializer extends StdSerializer<Task> {
       throws IOException, JsonProcessingException {
   
         jgen.writeStartObject();
-        jgen.writeNumberField("id", value.id);
-        jgen.writeStringField("description", value.description);
-		jgen.writeStringField("creationDate", value.creationDate != null ?
-			value.creationDate.format(DF) : "null");
+        jgen.writeNumberField("id", value.getServerId());
+        jgen.writeStringField("description", value.getDescription());
+		jgen.writeStringField("creationDate", value.getCreationDate() != null ?
+			value.getCreationDate().format(DF) : "null");
         jgen.writeEndObject();
     }
 }
