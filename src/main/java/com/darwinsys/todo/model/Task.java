@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.metawidget.inspector.annotation.UiComesAfter;
@@ -121,7 +119,7 @@ public class Task implements Serializable {
 	}
 
 	@UiComesAfter("project")
-	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	public LocalDate getCreationDate() {
 		return creationDate;
 	}
@@ -148,7 +146,7 @@ public class Task implements Serializable {
 	}
 	
 	@UiComesAfter("modified")
-	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	public LocalDate getDueDate() {
 		return dueDate;
 	}
@@ -184,7 +182,7 @@ public class Task implements Serializable {
 	}
 	
 	@UiComesAfter("dueDate")
-	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	public LocalDate getCompletedDate() {
 		return completedDate;
 	}
