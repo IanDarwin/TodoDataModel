@@ -18,7 +18,7 @@ import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiLabel;
 
 import com.darwinsys.todo.database.PriorityConverter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * One ToDo item or "task".
@@ -28,6 +28,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name="todo")
+@JsonSerialize(using = TaskJacksonSerializer.class)
+@JsonDeserialize(using = TaskJacksonDeserializer.class)
 public class Task implements Serializable {
 	
 	private static final long serialVersionUID = 4917727200248757334L;
