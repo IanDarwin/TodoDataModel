@@ -41,16 +41,20 @@ public class Task implements Serializable {
 	private static final char PROJECT = '+', CONTEXT = '@';
 	long serverId;		// Primary key: non-nullable server side
 	Long deviceId;		// PKey on remote device, nullable server-side
-	Priority priority = Priority.DEFAULT; // Enum; how important?
 	String name;	// what to do
+	String description; // more detailed
+
+	// Date fields:
 	LocalDate creationDate = LocalDate.now(); // when you decided you had to do it
+	LocalDate completedDate = null; // when you actually did it
+	LocalDate dueDate;		// when to do it by
+	long modified = System.currentTimeMillis();	// tstamp (UTC!); shoule be LocalDateTime
+
+	// Status Fields
+	Priority priority = Priority.DEFAULT; // Enum; how important?
 	Project project;	// what this task is part of
 	Context context;	// where to do it
-	LocalDate dueDate;		// when to do it by
 	Status status = Status.DEFAULT;
-	LocalDate completedDate = null; // when you actually did it
-	long modified = System.currentTimeMillis();	// tstamp (UTC!) when last modified.
-	String description;
 	
 	public Task() {
 		super();
