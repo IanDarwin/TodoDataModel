@@ -182,8 +182,6 @@ public class Task implements Serializable {
 			if (getCompletedDate() == null) {
 				completedDate = LocalDate.now();
 			}
-		} else {
-			setCompletedDate(null);
 		}
 	}
 	
