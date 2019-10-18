@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.darwinsys.todo.model.Priority;
+import com.darwinsys.todo.model.Status;
 import com.darwinsys.todo.model.Task;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -41,6 +43,16 @@ public class TaskJacksonSerializer extends StdSerializer<Task> {
 		if (completedDate != null) {
 			jgen.writeStringField("completedDate", completedDate.format(DF));
 		}
+
+		Priority prio = value.getPriority();
+		if (prio != null) {
+			jgen.writeStringField("priority", prio.toString());
+		}
+		Status status = value.getStatus();
+		if (status != null) {
+			jgen.writeStringField("status", status.toString());
+		}
+
 		jgen.writeEndObject();
 	}
 }

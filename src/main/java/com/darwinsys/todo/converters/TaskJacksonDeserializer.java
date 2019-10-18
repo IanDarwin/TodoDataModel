@@ -3,6 +3,8 @@ package com.darwinsys.todo.converters;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import com.darwinsys.todo.model.Priority;
+import com.darwinsys.todo.model.Status;
 import com.darwinsys.todo.model.Task;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -44,6 +46,17 @@ public class TaskJacksonDeserializer extends StdDeserializer<Task> {
 			t.setCompletedDate(LocalDate.from(TaskJacksonSerializer.DF.parse(completedDateNode.asText())));
 		}
 		t.setDescription(description);
+
+		final JsonNode prio = node.get("priority");
+		if (prio != null) {
+			t.setPriority(Priority.valueOf(prio.asText()));
+		}
+
+		final JsonNode statNode = node.get("status");
+		if (statNode != null) {
+			t.setStatus(Status.valueOf(statNode.asText()));
+		}
+
 		return t;
 	}
 }
