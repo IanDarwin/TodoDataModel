@@ -24,7 +24,7 @@ public class ImportTest {
 
 	final static Object[][] data = new Object[][]  {
 		// Expected Task         String used to create Actual Task
-		{new Task("Call Mom 1"), "(A) Call Mom 1"},
+		{new Task("Call Mom 1"), "Call Mom 1 (A)"},
 		{new Task("Call Mom 2"), "Call Mom 2"},
 		{new Task("Call Mom 3", null, "Home"),  "Call Mom 3 @Home"},
 		{new Task("Call Mom", null, "Home"),  "Call Mom @Home"},
