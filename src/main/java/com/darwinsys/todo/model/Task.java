@@ -264,9 +264,9 @@ public class Task implements Serializable {
 		if (getContext() != null) {
 			sb.append(' ').append(CONTEXT).append(context);
 		}
-		if (getSubTasks().size() > 0) {
-			sb.append(subTasks);
-		}
+		// Explicitly do not handle subtasks here; if the caller wants
+		// they can iterate over the subtasks; we can't really do it
+		// sensibly here.
 		return sb.toString();
 	}
 
