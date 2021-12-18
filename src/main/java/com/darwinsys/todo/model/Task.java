@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * One ToDo item or "task".
  * See http://todotxt.com/ and 
  * https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format.
+ * DO NOT re-generate toString if you add fields - it has a lot of hand-tuning.
  * @author Ian Darwin
  */
 @Entity
@@ -244,7 +245,6 @@ public class Task implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Task[").append(getName()).append(' ');
 		if (status == Status.COMPLETE) {
 			sb.append('x');
 			if (getCompletedDate() != null) {
@@ -257,6 +257,7 @@ public class Task implements Serializable {
 		if (getCreationDate() != null) {
 			sb.append(getCreationDate());
 		}
+		sb.append(' ').append(name);
 		if (getProject() != null) {
 			sb.append(' ').append(PROJECT).append(project);
 		}
@@ -266,7 +267,6 @@ public class Task implements Serializable {
 		if (getSubTasks().size() > 0) {
 			sb.append(subTasks);
 		}
-		sb.append(']');
 		return sb.toString();
 	}
 
