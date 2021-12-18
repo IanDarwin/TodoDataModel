@@ -2,6 +2,8 @@ package com.darwinsys.todo.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -10,9 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.metawidget.inspector.annotation.UiComesAfter;
 import org.metawidget.inspector.annotation.UiHidden;
 import org.metawidget.inspector.annotation.UiLabel;
@@ -35,10 +40,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(using=TaskJacksonSerializer.class)
 @JsonDeserialize(using=TaskJacksonDeserializer.class)
 public class Task implements Serializable {
-	
 	private static final long serialVersionUID = 4917727200248757334L;
 	
 	private static final char PROJECT = '+', CONTEXT = '@';
+
+	private List<Task> subTasks = new ArrayList<>();
+
 	long serverId;		// Primary key: non-nullable server side
 	Long deviceId;		// PKey on remote device, nullable server-side
 	String name;	// what to do
@@ -79,13 +86,31 @@ public class Task implements Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
 	@UiHidden
+	@JsonGetter("id")
 	public long getServerId() {
 		return serverId;
 	}
 	public void setServerId(long id) {
 		this.serverId = id;
 	}
-	
+
+	@OneToMany(mappedBy = "subTasks")
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	public List<Task> getSubTasks() {
+		return subTasks;
+	}
+
+	public void setSubTasks(List<Task> subTasks) {
+		this.subTasks = subTasks;
+	}
+
+	public void addSubTask(Task subTask) {
+		if (getSubTasks() == null) {
+			setSubTasks(new ArrayList<>());
+		}
+		subTasks.add(subTask);
+	}
+
 	/**
 	 * This field is for use of mobile devices, and is NOT saved
 	 * in the server database (obviously, if you consider that a
