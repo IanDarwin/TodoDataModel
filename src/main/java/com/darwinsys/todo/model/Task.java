@@ -265,9 +265,7 @@ public class Task implements Serializable {
 			sb.append(' ').append(CONTEXT).append(context);
 		}
 		if (getSubTasks().size() > 0) {
-			sb.append("SubTasks[");
-			subTasks.forEach(st -> sb.append(st->getName()).append(','));
-			sb.append(']');
+			sb.append(subTasks);
 		}
 		return sb.toString();
 	}
