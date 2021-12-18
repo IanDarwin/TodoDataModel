@@ -31,11 +31,6 @@ public class JacksonSerDeserTest {
 		"\"status\":\"DEFERRED\"",
 	};
 	String startJson;
-	/*
-	{"id":1,"name":"Get up in the morning","description":"Always a good idea.",
-	"creationDate":"2010-11-12","dueDate":"2034-05-06","completedDate":"2020-01-02",
-	"priority":"High","status":"DEFERRED"}
-	 */
 
 	@Before
 	public void init() {
