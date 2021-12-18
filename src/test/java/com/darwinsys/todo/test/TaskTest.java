@@ -55,7 +55,15 @@ public class TaskTest {
 	@Test
 	public void testSimpleToString() {
 		t.setName(GET_THE_LEAD_OUT);
-		assertEquals("toString", "(A) " + today + ' ' + GET_THE_LEAD_OUT, t.toString());
+		assertEquals("toString", "Task[" + GET_THE_LEAD_OUT + " (A) " + today + ']', t.toString());
+	}
+
+	@Test
+	public void testSubtasks() {
+		t.setName(GET_THE_LEAD_OUT);
+		t.addSubTask(new Task("Test Subtask"));
+		System.out.println("Task is " + t.toString());
+		assertEquals(1, t.getSubTasks().size());
 	}
 
 	@Test
@@ -64,14 +72,14 @@ public class TaskTest {
 		t.setContext(CONTEXT);
 		t.setProject(PROJECT);
 		t.setPriority(Priority.High);
-		assertEquals("toString", "(B) " + today + SPACE + "Get the lead out" + SPACE + "+" + PROJECT + ' ' + "@" + CONTEXT, 
+		assertEquals("toString", "Task[" + GET_THE_LEAD_OUT + " (B) " + today + SPACE + "+" + PROJECT + ' ' + "@" + CONTEXT + ']',
 				t.toString());
 	}
 	
 	@Test
-	public void testCompleteToString() {
+	public void testCompletedToString() {
 		t.setName(GET_THE_LEAD_OUT);
 		t.complete();
-		assertEquals("toString", "x" + SPACE + today + SPACE + "(A) " + today + ' ' + GET_THE_LEAD_OUT, t.toString());
+		assertEquals("toString", "Task[" + GET_THE_LEAD_OUT + ' ' + 'x' + SPACE + today + SPACE + "(A) " + today + ']', t.toString());
 	}
 }

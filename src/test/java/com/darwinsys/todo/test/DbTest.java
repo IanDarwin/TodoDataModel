@@ -37,4 +37,18 @@ public class DbTest {
 		Task t2 = entityManager.find(Task.class, id);
 		assertEquals(task, t2);
 	}
+
+	@Test
+	public void testSaveLoadWithSubtask() {
+		Task task = new Task("Finish testing and release product");
+		Task subTask = new Task("Add more tests!");
+		task.addSubTask(subTask);
+		entityManager.getTransaction().begin();
+		entityManager.persist(task);
+		entityManager.getTransaction().commit();
+		long id = task.getServerId();
+		Task t2 = entityManager.find(Task.class, id);
+		assertEquals(task, t2);
+		assertEquals(1, t2.getSubTasks().size());
+	}
 }

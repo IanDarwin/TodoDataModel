@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -243,6 +244,7 @@ public class Task implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append("Task[").append(getName()).append(' ');
 		if (status == Status.COMPLETE) {
 			sb.append('x');
 			if (getCompletedDate() != null) {
@@ -255,87 +257,17 @@ public class Task implements Serializable {
 		if (getCreationDate() != null) {
 			sb.append(getCreationDate());
 		}
-		sb.append(' ').append(name);
 		if (getProject() != null) {
 			sb.append(' ').append(PROJECT).append(project);
 		}
 		if (getContext() != null) {
 			sb.append(' ').append(CONTEXT).append(context);
 		}
+		if (getSubTasks().size() > 0) {
+			sb.append(subTasks);
+		}
+		sb.append(']');
 		return sb.toString();
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((completedDate == null) ? 0 : completedDate.hashCode());
-		result = prime * result + ((context == null) ? 0 : context.hashCode());
-		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((dueDate == null) ? 0 : dueDate.hashCode());
-		result = prime * result + (int) (serverId ^ (serverId >>> 32));
-		result = prime * result + (int) (modified ^ (modified >>> 32));
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
-		result = prime * result + ((project == null) ? 0 : project.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (completedDate == null) {
-			if (other.completedDate != null)
-				return false;
-		} else if (!completedDate.equals(other.completedDate))
-			return false;
-		if (context == null) {
-			if (other.context != null)
-				return false;
-		} else if (!context.equals(other.context))
-			return false;
-		if (creationDate == null) {
-			if (other.creationDate != null)
-				return false;
-		} else if (!creationDate.equals(other.creationDate))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (dueDate == null) {
-			if (other.dueDate != null)
-				return false;
-		} else if (!dueDate.equals(other.dueDate))
-			return false;
-		if (serverId != other.serverId)
-			return false;
-		if (modified != other.modified)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (priority != other.priority)
-			return false;
-		if (project == null) {
-			if (other.project != null)
-				return false;
-		} else if (!project.equals(other.project))
-			return false;
-		if (status != other.status)
-			return false;
-		return true;
 	}
 
 	@UiComesAfter("creationDate")
@@ -345,5 +277,18 @@ public class Task implements Serializable {
 
 	public void setModified(long modified) {
 		this.modified = modified;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Task task = (Task) o;
+		return getServerId() == task.getServerId() && getModified() == task.getModified() && Objects.equals(getSubTasks(), task.getSubTasks()) && Objects.equals(getDeviceId(), task.getDeviceId()) && getName().equals(task.getName()) && Objects.equals(getDescription(), task.getDescription()) && getCreationDate().equals(task.getCreationDate()) && Objects.equals(getCompletedDate(), task.getCompletedDate()) && Objects.equals(getDueDate(), task.getDueDate()) && getPriority() == task.getPriority() && Objects.equals(getProject(), task.getProject()) && Objects.equals(getContext(), task.getContext()) && getStatus() == task.getStatus();
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getSubTasks(), getServerId(), getDeviceId(), getName(), getDescription(), getCreationDate(), getCompletedDate(), getDueDate(), getModified(), getPriority(), getProject(), getContext(), getStatus());
 	}
 }

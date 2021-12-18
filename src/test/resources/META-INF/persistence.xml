@@ -6,7 +6,7 @@
    
 	<persistence-unit name="todo">
 
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	<class>com.darwinsys.todo.model.Task</class>
 	<class>com.darwinsys.todo.model.Project</class>
