@@ -79,29 +79,11 @@
         </dependency>
 
 		<!-- JPA needing a driver, let's use Hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>6.0.0.Beta2</version>
-			<exclusions>
-					<exclusion>
-						<groupId>xml-apis</groupId>
-						<artifactId>xml-apis</artifactId>
-					</exclusion>
-			</exclusions>
-			<scope>test</scope>
-		</dependency>
+		<!-- NB Hibernate entity manager, hibernate ORM, move into core at 6.0+-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>6.0.0.Alpha7</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.validator</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>7.0.1.Final</version>
-			<scope>test</scope>
+			<version>5.6.2.Final</version>
 		</dependency>
 
 		<!-- And Hibernate needs a JDBC driver; use a simple DB when testing -->
