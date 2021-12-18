@@ -1,5 +1,6 @@
 package com.darwinsys.todo.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -55,6 +56,11 @@ public class Import {
 				} else {
 					t.setPriority(Priority.valueOf(prioString));
 				}
+			}
+			String completedDate = m.group(GROUP_CREATION_DATE);
+			if (completedDate != null) {
+				LocalDate localDate = LocalDate.parse(completedDate);
+				t.setCompletedDate(localDate);
 			}
 			t.setName(m.group(GROUP_REST));
 			return t;

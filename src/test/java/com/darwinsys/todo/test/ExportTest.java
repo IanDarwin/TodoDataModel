@@ -28,10 +28,10 @@ public class ExportTest {
 		t.setCreationDate(LocalDate.of(2013,10,06));
 	}
 
-	@Test @Ignore // don't care about this ATM
+	@Test
 	public void testExportTasks() {
 		String expect = 
-		"\"Get laundry done\",,,,,\"2013-10-06\",,,,,\"2\",,,,";
+		"(B) 2013-10-06 Get laundry done";
 		String actual = exporter.export(t);
 		assertEquals("export text", expect, actual);
 	}

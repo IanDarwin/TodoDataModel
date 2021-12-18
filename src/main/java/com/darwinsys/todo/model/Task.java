@@ -33,8 +33,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 /**
  * One ToDo item or "task".
  * See http://todotxt.com/ and 
- * https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format.
- * DO NOT re-generate toString if you add fields - it has a lot of hand-tuning.
+ * https://github.com/todotxt/todotxt/.
+ * DO NOT re-generate toString if you add fields - it has a lot of hand-tuning
+ * and is order-dependent!
  * @author Ian Darwin
  */
 @Entity
@@ -57,7 +58,7 @@ public class Task implements Serializable {
 	LocalDate creationDate = LocalDate.now(); // when you decided you had to do it
 	LocalDate completedDate = null; // when you actually did it
 	LocalDate dueDate;		// when to do it by
-	long modified = System.currentTimeMillis();	// tstamp (UTC!); shoule be LocalDateTime
+	LocalDate modified;		// Don't care about minutes, hours
 
 	// Status Fields
 	Priority priority = Priority.DEFAULT; // Enum; how important?
@@ -116,7 +117,7 @@ public class Task implements Serializable {
 	/**
 	 * This field is for use of mobile devices, and is NOT saved
 	 * in the server database (obviously, if you consider that a
-	 * user might have 2, or 6, different mobile devices...).
+	 * user might have 1, 2, or 6 different mobile devices...).
 	 * @return The ID that this has on their device.
 	 */
 	@Transient @UiHidden @JsonIgnore
@@ -271,20 +272,32 @@ public class Task implements Serializable {
 	}
 
 	@UiComesAfter("creationDate")
-	public long getModified() {
+	public LocalDate getModified() {
 		return modified;
 	}
 
-	public void setModified(long modified) {
+	public void setModified(LocalDate modified) {
 		this.modified = modified;
 	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (o == null || Task.class != o.getClass()) return false;
 		Task task = (Task) o;
-		return getServerId() == task.getServerId() && getModified() == task.getModified() && Objects.equals(getSubTasks(), task.getSubTasks()) && Objects.equals(getDeviceId(), task.getDeviceId()) && getName().equals(task.getName()) && Objects.equals(getDescription(), task.getDescription()) && getCreationDate().equals(task.getCreationDate()) && Objects.equals(getCompletedDate(), task.getCompletedDate()) && Objects.equals(getDueDate(), task.getDueDate()) && getPriority() == task.getPriority() && Objects.equals(getProject(), task.getProject()) && Objects.equals(getContext(), task.getContext()) && getStatus() == task.getStatus();
+		return
+				getName().equals(task.getName())
+						&& getPriority() == task.getPriority()
+						&& getServerId() == task.getServerId()
+						&& Objects.equals(getDeviceId(), task.getDeviceId())
+				&& Objects.equals(getModified(), task.getModified())
+				&& Objects.equals(getDescription(), task.getDescription())
+				&& Objects.equals(getCreationDate(), task.getCreationDate())
+				&& Objects.equals(getCompletedDate(), task.getCompletedDate())
+				&& Objects.equals(getDueDate(), task.getDueDate())
+				&& Objects.equals(getProject(), task.getProject())
+				&& Objects.equals(getContext(), task.getContext())
+				&& getStatus() == task.getStatus();
 	}
 
 	@Override

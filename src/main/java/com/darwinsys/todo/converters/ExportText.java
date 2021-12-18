@@ -7,6 +7,6 @@ public class ExportText extends Export {
 
 	@Override
 	public String export(Task t) {
-		return t.getName();
+		return t.toString();
 	}
 }

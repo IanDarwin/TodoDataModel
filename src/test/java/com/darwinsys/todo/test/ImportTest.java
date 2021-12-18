@@ -47,12 +47,10 @@ public class ImportTest {
     		this.input = input;
     }   
 
-	@Test @Ignore // Fine-detailed problems with equals method?
+	@Test // Fine-detailed problems with equals method?
 	public void testImportTask() {
 		Task actual = Import.importTask(input);
-		assertNotNull("import", actual);
-		System.out.println(actual.getName());
+		System.out.println("Actual:" + actual);
 		assertEquals(expected, actual);
 	}
-
 }
