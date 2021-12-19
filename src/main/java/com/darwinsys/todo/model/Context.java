@@ -1,6 +1,8 @@
 package com.darwinsys.todo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +23,17 @@ public class Context implements Comparable<Context>, Serializable {
 
 	public Context(String name) {
 		this.name = name;
+	}
+
+	private static final List<Context> cache = new ArrayList<>();
+	public static Context of(String name) {
+		for (Context p : cache) {
+			if (p.name.equals(name))
+				return p;
+		}
+		Context np = new Context(name);
+		cache.add(np);
+		return np;
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
