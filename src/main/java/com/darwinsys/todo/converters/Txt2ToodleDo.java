@@ -13,7 +13,7 @@ public class Txt2ToodleDo {
 	public static void main(String[] args) throws Exception {
 		final String fileName = "/home/ian/TODO.txt";
 		List<Task> tasks =
-				Files.lines(Path.of(fileName)).map(s->Import.importTask(s)).collect(Collectors.toList());
+				Files.lines(Path.of(fileName)).map(Import::importTask).collect(Collectors.toList());
 		final List<String> exportedTasks = new ExportText().export(tasks);
 		exportedTasks.forEach(System.out::println);
 	}
