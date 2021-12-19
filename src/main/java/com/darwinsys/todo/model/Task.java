@@ -37,6 +37,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * https://github.com/todotxt/todotxt/.
  * DO NOT re-generate toString if you add fields - it has a lot of hand-tuning
  * and is order-dependent!
+ * DO NOT re-generate equals, as it has been hand-tweaked.
  * @author Ian Darwin
  */
 @Entity
