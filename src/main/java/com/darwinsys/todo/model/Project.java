@@ -1,6 +1,8 @@
 package com.darwinsys.todo.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,17 @@ public class Project implements Serializable {
 
 	public Project(String name) {
 		this.name = name;
+	}
+
+	private static final List<Project> cache = new ArrayList<>();
+	public static Project of(String name) {
+		for (Project p : cache) {
+			if (p.name.equals(name))
+				return p;
+		}
+		Project np = new Project(name);
+		cache.add(np);
+		return np;
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)

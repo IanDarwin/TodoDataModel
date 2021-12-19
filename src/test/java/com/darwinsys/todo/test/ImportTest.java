@@ -1,20 +1,17 @@
 package com.darwinsys.todo.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Ignore;
+import com.darwinsys.todo.model.Import;
+import com.darwinsys.todo.model.Priority;
+import com.darwinsys.todo.model.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.darwinsys.todo.model.Import;
-import com.darwinsys.todo.model.Priority;
-import com.darwinsys.todo.model.Task;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Some tests of import functionality.
