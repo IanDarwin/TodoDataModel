@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -77,8 +78,10 @@ public class Task implements Serializable {
 	
 	public Task(String name, String project, String context) {
 		this.name = name;
-		this.project = new Project(project);
-		this.context = new Context(context);
+		if (project != null)
+			this.project = new Project(project);
+		if (context != null)
+			this.context = new Context(context);
 	}
 
 	public Task(String name, Priority priority) {

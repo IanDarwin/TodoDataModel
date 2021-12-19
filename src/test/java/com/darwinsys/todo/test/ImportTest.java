@@ -27,7 +27,7 @@ public class ImportTest {
 		{new Task("Call Mom 1"), "(A) Call Mom 1"},
 		{new Task("Call Mom 2"), "Call Mom 2"},
 		{new Task("Call Mom 3", null, "Home"),  "Call Mom 3 @Home"},
-		{new Task("Call Mom", null, "Home"),  "Call Mom @Home"},
+		{new Task("Call Mom 4", "Family", "Home"),  "Call Mom 4 @Home +Family"},
 	};
 	static {
 		((Task) data[0][0]).setPriority(Priority.Top);
