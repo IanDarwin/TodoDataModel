@@ -5,7 +5,7 @@
 	<groupId>com.darwinsys</groupId>
 	<artifactId>todo-datamodel</artifactId>
 	<version>1.2.2</version>
-	<packaging>jar</packaging>
+    <packaging>jar</packaging>
 	<inceptionYear>2005</inceptionYear>
 	<description>The data model classes for TodoMore, the minimalist ToDo Manager.
 		Annotated for JPA and for MetaWidget, with scope=provided so you don't have
@@ -39,7 +39,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javase.version>1.8</javase.version>
+		<javase.version>11</javase.version>
 		<javaee.version>8.0</javaee.version>
 		<maven.compiler.source>${javase.version}</maven.compiler.source>
 		<maven.compiler.target>${javase.version}</maven.compiler.target>
