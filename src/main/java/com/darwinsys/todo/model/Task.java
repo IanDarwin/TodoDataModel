@@ -62,12 +62,13 @@ public class Task implements Serializable {
 	LocalDate dueDate;		// when to do it by
 	LocalDate modified;		// Don't care about minutes, hours
 
-	// Status Fields
+	// Meta Fields
 	Priority priority = Priority.DEFAULT; // Enum; how important?
 	Project project;	// what this task is part of
 	Context context;	// where to do it
 	Status status = Status.DEFAULT;
-	
+	Type type;
+
 	public Task() {
 		super();
 	}
@@ -195,7 +196,15 @@ public class Task implements Serializable {
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
-	
+
+	@UiComesAfter("dueDate")
+	public Type getType() {
+		return type;
+	}
+	public void setType(Type type) {
+		this.type = type;
+	}
+
 	@UiComesAfter("priority")
 	public Status getStatus() {
 		return status;

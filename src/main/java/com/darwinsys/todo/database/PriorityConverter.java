@@ -16,6 +16,10 @@ public class PriorityConverter implements AttributeConverter<Priority, Integer> 
 
 	@Override
 	public Priority convertToEntityAttribute(Integer i) {
+		if (i == null) {
+			System.err.println("Error: Priority convertToEntityAttribute() ordinal is null!");
+			return Priority.values()[0];
+		}
 		return Priority.values()[i];
 	}
 }
