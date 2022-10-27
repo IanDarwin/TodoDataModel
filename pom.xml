@@ -4,15 +4,15 @@
 
 	<groupId>com.darwinsys</groupId>
 	<artifactId>todo-datamodel</artifactId>
-	<version>1.2.2</version>
-    <packaging>jar</packaging>
+	<version>1.2.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<inceptionYear>2005</inceptionYear>
 	<description>The data model classes for TodoMore, the minimalist ToDo Manager.
 		Annotated for JPA and for MetaWidget, with scope=provided so you don't have
 		to use these APIs if you don't need them in your application.
 	</description>
 
-	<!-- This doesn't really need to be in Maven Central but it's here for the benefit of ME^H^H
+	<!-- This doesn't really need to be in Maven Central but it's in there for the benefit of ME^H^H
 	 *** people who try to build other Todo parts without doing "mvn install" here 
 	 *** and bug me^H^H^H^H^H^H^H^H^H.
 	 -->
@@ -48,6 +48,11 @@
 	</properties>
 
 	<dependencies>
+		<!-- N.B. This is a LIBRARY so ALL deps must be either
+			provided, compile, or test scope.
+			NOT the (default) runtime scope.
+			-->
+
 		<!-- Java EE API - just for JPA -->
 		<dependency>
 			<groupId>javax</groupId>    
@@ -84,6 +89,7 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.6.2.Final</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- And Hibernate needs a JDBC driver; use a simple DB when testing -->
