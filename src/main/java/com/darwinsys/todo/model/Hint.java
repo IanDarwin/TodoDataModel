@@ -2,7 +2,7 @@ package com.darwinsys.todo.model;
 
 import java.io.Serializable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * A Hint is one little note to help people improve their use of

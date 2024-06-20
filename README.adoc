@@ -1,8 +1,9 @@
 = ToDo Task Model
 
 This is a Java/JPA model for the ToDo.txt Task format.
-You MUST have JPA 2.1 available to compile this (should be no
-problem as it's included in Java EE 7+).
+
+This version uses jakarta.persistence, not the legacy javax.persistence.
+If you still need javax, use release 1.2.3 or git checkout the tag 'javax'.
 
 == What works:
 
@@ -12,14 +13,15 @@ problem as it's included in Java EE 7+).
 
 == What should be added:
 
-. Add http://metawidget.org/[MetaWidget] tags to entity classes.
+TBA
 
 == What's not right yet:
 
-. It is known that Eclipse flags a _false_ error due to the lack of
-persistence.xml; this file MUST NOT be here (nor in the output Jar file)
-as different implementations such as ../TodoService 
-must be allowed to provide it instead.
+. Eclipse flags a _false_ error due to the lack of
+persistence.xml; this file MUST NOT be in src/main/resources
+(nor in the output Jar file)
+as the client using this library must provide its own version.
+
 . Must remove Project/Context when parsing input, else you get
   (A) Call Mom @Home @Home @Home...
 
